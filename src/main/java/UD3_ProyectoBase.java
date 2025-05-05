@@ -10,6 +10,6 @@
 public class UD3_ProyectoBase {
 
     public static void main(String[] args) {
-        
+        controlador.controladorPrincipal.iniciar();
     }
 }

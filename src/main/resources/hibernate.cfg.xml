@@ -8,10 +8,10 @@
         <property name="hibernate.connection.password">root</property>
         <!--Debes modificar 2 lineas para la base de datos e ip-->
         <!-- 1.-Debes indicar la ip y la Bd a la que conectas-->
-        <property name="hibernate.connection.url">jdbc:mysql://IP:3306/BD?zeroDateTimeBehavior=CONVERT_TO_NULL</property>
+        <property name="hibernate.connection.url">jdbc:mysql://192.168.56.103:3306/playbackd?zeroDateTimeBehavior=CONVERT_TO_NULL</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
-        <property name="hibernate.default_schema">BD</property> <!--2.- Pon aqui la BD -->
+        <property name="hibernate.default_schema">playbackd</property> <!--2.- Pon aqui la BD -->
         <property name="hibernate.connection.autocommit">false</property>
         <property name="hibernate.current_session_context_class">thread</property> 
         <property name="hibernate.show_sql">true</property>
@@ -20,7 +20,9 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- debes incluir todas las clases que mapeas-->
         <!--         <mapping class="modelo.vo.clase"/>        -->
-        
+        <mapping class="modelo.vo.Albums"/>
+        <mapping class="modelo.vo.Users"/>
+        <mapping class="modelo.vo.Add"/>
     </session-factory>	
 </hibernate-configuration>
 
