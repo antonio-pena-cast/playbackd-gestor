@@ -8,6 +8,7 @@ import java.io.File;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import modelo.vo.Albums;
 import modelo.vo.Users;
@@ -54,6 +55,20 @@ public class Principal extends javax.swing.JFrame {
         btnBorrarAlbum = new javax.swing.JButton();
         txtImagen = new javax.swing.JLabel();
         fileChooser = new javax.swing.JFileChooser();
+        frmListados = new javax.swing.JFrame();
+        jLabel11 = new javax.swing.JLabel();
+        txtListarEmail = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtListarGenero = new javax.swing.JTextField();
+        btnListarGenero = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        btnListarUsuarios = new javax.swing.JButton();
+        btnListarAlbums = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        btnListarPlayed = new javax.swing.JButton();
+        btnListarListenLIst = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtListarArea = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         cmbUser = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -226,6 +241,137 @@ public class Principal extends javax.swing.JFrame {
         gridBagConstraints.gridy = 6;
         frmAlbums.getContentPane().add(txtImagen, gridBagConstraints);
 
+        frmListados.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                frmListadosWindowClosing(evt);
+            }
+        });
+        frmListados.getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        jLabel11.setText("Email:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        frmListados.getContentPane().add(jLabel11, gridBagConstraints);
+
+        txtListarEmail.setPreferredSize(new java.awt.Dimension(100, 22));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        frmListados.getContentPane().add(txtListarEmail, gridBagConstraints);
+
+        jLabel12.setText("Genero:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        frmListados.getContentPane().add(jLabel12, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        frmListados.getContentPane().add(txtListarGenero, gridBagConstraints);
+
+        btnListarGenero.setText("Listar Albums Genero");
+        btnListarGenero.setPreferredSize(new java.awt.Dimension(100, 23));
+        btnListarGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarGeneroActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        frmListados.getContentPane().add(btnListarGenero, gridBagConstraints);
+
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        btnListarUsuarios.setText("Listar Usuarios");
+        btnListarUsuarios.setPreferredSize(new java.awt.Dimension(165, 23));
+        btnListarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarUsuariosActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 10);
+        jPanel3.add(btnListarUsuarios, gridBagConstraints);
+
+        btnListarAlbums.setText("Listar Albums");
+        btnListarAlbums.setPreferredSize(new java.awt.Dimension(165, 23));
+        btnListarAlbums.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarAlbumsActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
+        jPanel3.add(btnListarAlbums, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        frmListados.getContentPane().add(jPanel3, gridBagConstraints);
+
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        btnListarPlayed.setText("Listar 'Played' Albums");
+        btnListarPlayed.setPreferredSize(new java.awt.Dimension(165, 23));
+        btnListarPlayed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarPlayedActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel4.add(btnListarPlayed, gridBagConstraints);
+
+        btnListarListenLIst.setText("Listar 'ListenList' Albums");
+        btnListarListenLIst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarListenLIstActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel4.add(btnListarListenLIst, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        frmListados.getContentPane().add(jPanel4, gridBagConstraints);
+
+        txtListarArea.setColumns(20);
+        txtListarArea.setRows(5);
+        jScrollPane1.setViewportView(txtListarArea);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        frmListados.getContentPane().add(jScrollPane1, gridBagConstraints);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(360, 250));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -358,6 +504,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu1.add(mnuAlbums);
 
         mnuListas.setText("Listas");
+        mnuListas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuListasActionPerformed(evt);
+            }
+        });
         jMenu1.add(mnuListas);
 
         jMenuBar1.add(jMenu1);
@@ -427,6 +578,37 @@ public class Principal extends javax.swing.JFrame {
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         controladorPrincipal.borrarUsuario();
     }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void mnuListasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuListasActionPerformed
+        this.setVisible(false);
+        frmListados.setVisible(true);
+        frmListados.setSize(400, 350);
+        frmListados.setLocationRelativeTo(null);
+    }//GEN-LAST:event_mnuListasActionPerformed
+
+    private void frmListadosWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_frmListadosWindowClosing
+        this.setVisible(true);
+    }//GEN-LAST:event_frmListadosWindowClosing
+
+    private void btnListarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarUsuariosActionPerformed
+        controladorPrincipal.listarUsuarios();
+    }//GEN-LAST:event_btnListarUsuariosActionPerformed
+
+    private void btnListarAlbumsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarAlbumsActionPerformed
+        controladorPrincipal.listarAlbums();
+    }//GEN-LAST:event_btnListarAlbumsActionPerformed
+
+    private void btnListarPlayedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPlayedActionPerformed
+        controladorPrincipal.listarPlayedAlbums();
+    }//GEN-LAST:event_btnListarPlayedActionPerformed
+
+    private void btnListarListenLIstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarListenLIstActionPerformed
+        controladorPrincipal.listarListenListAlbums();
+    }//GEN-LAST:event_btnListarListenLIstActionPerformed
+
+    private void btnListarGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarGeneroActionPerformed
+        controladorPrincipal.listarAlbumGenero();
+    }//GEN-LAST:event_btnListarGeneroActionPerformed
 
     public JTextField getTxtContrasenha() {
         return txtContrasenha;
@@ -515,6 +697,30 @@ public class Principal extends javax.swing.JFrame {
     public void setFileChooser(JFileChooser fileChooser) {
         this.fileChooser = fileChooser;
     }
+
+    public JTextArea getTxtListarArea() {
+        return txtListarArea;
+    }
+
+    public void setTxtListarArea(JTextArea txtListarArea) {
+        this.txtListarArea = txtListarArea;
+    }
+
+    public JTextField getTxtListarEmail() {
+        return txtListarEmail;
+    }
+
+    public void setTxtListarEmail(JTextField txtListarEmail) {
+        this.txtListarEmail = txtListarEmail;
+    }
+
+    public JTextField getTxtListarGenero() {
+        return txtListarGenero;
+    }
+
+    public void setTxtListarGenero(JTextField txtListarGenero) {
+        this.txtListarGenero = txtListarGenero;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnhadir;
@@ -522,14 +728,22 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnBorrarAlbum;
     private javax.swing.JButton btnImagen;
+    private javax.swing.JButton btnListarAlbums;
+    private javax.swing.JButton btnListarGenero;
+    private javax.swing.JButton btnListarListenLIst;
+    private javax.swing.JButton btnListarPlayed;
+    private javax.swing.JButton btnListarUsuarios;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnModificarAlbum;
     private javax.swing.JComboBox<Albums> cmbAlbums;
     private javax.swing.JComboBox<Users> cmbUser;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JFrame frmAlbums;
+    private javax.swing.JFrame frmListados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -542,6 +756,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem mnuAlbums;
     private javax.swing.JMenuItem mnuListas;
     private javax.swing.JTextField txtAlbumNombre;
@@ -551,6 +768,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtGenero;
     private javax.swing.JLabel txtImagen;
+    private javax.swing.JTextArea txtListarArea;
+    private javax.swing.JTextField txtListarEmail;
+    private javax.swing.JTextField txtListarGenero;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

@@ -27,7 +27,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import modelo.dao.AddDAO;
+import modelo.dao.ListDAO;
 import modelo.dao.AlbumsDAO;
 import modelo.dao.UsersDAO;
 import modelo.vo.Albums;
@@ -44,7 +44,7 @@ public class controladorPrincipal {
     public static Session session;
     public static String imagePath;
 
-    public static AddDAO addDAO;
+    public static ListDAO lisDAO;
     public static AlbumsDAO albDAO;
     public static UsersDAO useDAO;
 
@@ -61,7 +61,7 @@ public class controladorPrincipal {
 
     public static void iniciaSession() {
         session = HibernateUtil.getSessionFactory().openSession();
-        addDAO = HibernateUtil.getAddDAO();
+        lisDAO = HibernateUtil.getAddDAO();
         albDAO = HibernateUtil.getAlbumsDAO();
         useDAO = HibernateUtil.getUsersDAO();
     }
@@ -159,7 +159,7 @@ public class controladorPrincipal {
 
             Users u = (Users) modeloCombo.getSelectedItem();
 
-            addDAO.borrarAddUsuario(session, u);
+            lisDAO.borrarAddUsuario(session, u);
 
             useDAO.borrarUsuario(session, u);
 
@@ -439,7 +439,7 @@ public class controladorPrincipal {
 
             Albums a = (Albums) modeloComboAlbums.getSelectedItem();
 
-            addDAO.borrarAddAlbum(session, a);
+            lisDAO.borrarAddAlbum(session, a);
 
             albDAO.borrarAlbum(session, a);
 
@@ -457,6 +457,131 @@ public class controladorPrincipal {
         } finally {
             limpiarDatosAlbums();
             cargarComboAlbums();
+        }
+    }
+
+    /*---LISTADOS---*/
+    public static void listarUsuarios() {
+        try {
+            HibernateUtil.beginTx(session);
+            
+            useDAO.listarUsuarios(session, ventana.getTxtListarArea());
+            
+            HibernateUtil.commitTx(session);
+        } catch (SQLException ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void listarAlbums() {
+        try {
+            HibernateUtil.beginTx(session);
+            
+            albDAO.listarAlbums(session, ventana.getTxtListarArea());
+            
+            HibernateUtil.commitTx(session);
+        } catch (SQLException ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void listarPlayedAlbums() {
+        if (ventana.getTxtListarEmail().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Faltan datos por rellenar");
+            return;
+        }
+        
+        try {
+            HibernateUtil.beginTx(session);
+            
+            Users u = useDAO.buscarUsuario(session, ventana.getTxtListarEmail().getText());
+            
+            if (u == null) {
+                JOptionPane.showMessageDialog(null, "No existe ningun usuario con ese email");
+                return;
+            }
+            
+            lisDAO.listarAlbums(session, u, "played", ventana.getTxtListarArea());
+            
+            HibernateUtil.commitTx(session);
+        } catch (SQLException ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void listarListenListAlbums() {
+        if (ventana.getTxtListarEmail().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Faltan datos por rellenar");
+            return;
+        }
+        
+        try {
+            HibernateUtil.beginTx(session);
+            
+            Users u = useDAO.buscarUsuario(session, ventana.getTxtListarEmail().getText());
+            
+            if (u == null) {
+                JOptionPane.showMessageDialog(null, "No existe ningun usuario con ese email");
+                return;
+            }
+            
+            lisDAO.listarAlbums(session, u, "listenlist", ventana.getTxtListarArea());
+            
+            HibernateUtil.commitTx(session);
+        } catch (SQLException ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void listarAlbumGenero() {
+        if (ventana.getTxtListarGenero().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Faltan datos por rellenar");
+            return;
+        }
+        
+        try {
+            HibernateUtil.beginTx(session);
+            
+            albDAO.listarAlbumsGenero(session, ventana.getTxtListarGenero().getText(), ventana.getTxtListarArea());
+            
+            HibernateUtil.commitTx(session);
+        } catch (SQLException ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(controladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

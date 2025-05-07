@@ -4,9 +4,12 @@
  */
 package modelo.dao;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextArea;
 import modelo.vo.Albums;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -38,13 +41,13 @@ public class AlbumsDAO {
 
     public void insertarAlbum(Session session, String nombre, String autor, String genero, Date fecha, String encodeImagen) throws Exception {
         Albums a;
-        
+
         if (encodeImagen == null) {
             a = new Albums(nombre, autor, genero, fecha);
         } else {
             a = new Albums(nombre, autor, genero, fecha, encodeImagen);
         }
-        
+
         session.save(a);
     }
 
@@ -59,6 +62,53 @@ public class AlbumsDAO {
 
     public void borrarAlbum(Session session, Albums a) throws Exception {
         session.delete(a);
+    }
+
+    public void listarAlbums(Session session, JTextArea txtListarArea) throws Exception {
+        txtListarArea.setText("");
+        Albums a;
+        Query q = session.createQuery("from Albums");
+
+        if (q.list().size() <= 0) {
+            txtListarArea.setText("No hay albums");
+            return;
+        }
+        
+        Iterator it = q.list().iterator();
+
+        while (it.hasNext()) {
+            a = (Albums) it.next();
+
+            Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String fecha = formatter.format(a.getReleaseDate());
+
+            txtListarArea.append("ID: " + a.getId() + ", Nombre: " + a.getName() + ", Autor: "
+                    + a.getAuthor() + ", Genero: " + a.getGenre() + ", Fecha de Salida: " + fecha + "\n");
+        }
+    }
+
+    public void listarAlbumsGenero(Session session, String genero, JTextArea txtListarArea) throws Exception {
+        txtListarArea.setText("");
+        Albums a;
+        Query q = session.createQuery("FROM Albums a WHERE a.genre = :genero");
+        q.setParameter("genero", genero);
+
+        if (q.list().size() <= 0) {
+            txtListarArea.setText("No hay ningun album con el genero: " + genero);
+            return;
+        }
+
+        Iterator it = q.list().iterator();
+
+        while (it.hasNext()) {
+            a = (Albums) it.next();
+
+            Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String fecha = formatter.format(a.getReleaseDate());
+            
+            txtListarArea.append("ID: " + a.getId() + ", Nombre: " + a.getName() + ", Autor: "
+                    + a.getAuthor() + ", Fecha de Salida: " + fecha + "\n");
+        }
     }
 
 }

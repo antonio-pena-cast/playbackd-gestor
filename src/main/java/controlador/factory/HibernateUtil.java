@@ -1,6 +1,6 @@
 package controlador.factory;
 
-import modelo.dao.AddDAO;
+import modelo.dao.ListDAO;
 import modelo.dao.AlbumsDAO;
 import modelo.dao.UsersDAO;
 import org.hibernate.Session;
@@ -53,8 +53,8 @@ public class HibernateUtil {
      * ********************** INCORPORA LOS MÉTODOS PARA CREAR LOS OBJETOS DAO *******
      */
 
-    public static AddDAO getAddDAO() {
-        return new AddDAO();
+    public static ListDAO getAddDAO() {
+        return new ListDAO();
     };
     
     public static AlbumsDAO getAlbumsDAO() {

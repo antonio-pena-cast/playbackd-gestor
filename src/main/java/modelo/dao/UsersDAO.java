@@ -6,6 +6,7 @@ package modelo.dao;
 
 import java.util.Iterator;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextArea;
 import modelo.vo.Users;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -53,6 +54,24 @@ public class UsersDAO {
 
     public void borrarUsuario(Session session, Users u) throws Exception {
         session.delete(u);
+    }
+
+    public void listarUsuarios(Session session, JTextArea txtListarArea) throws Exception {
+        txtListarArea.setText("");
+        Users u;
+        Query q = session.createQuery("from Users");
+        
+        if (q.list().size() <= 0) {
+            txtListarArea.setText("No hay usuarios");
+            return;
+        }
+        
+        Iterator it = q.list().iterator();
+        
+        while (it.hasNext()) {
+            u = (Users) it.next();
+            txtListarArea.append("ID: " + u.getId() + ", Nombre: " + u.getName() + ", Email: " + u.getEmail() + "\n");
+        }
     }
 
 }
