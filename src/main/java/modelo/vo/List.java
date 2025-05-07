@@ -22,22 +22,22 @@ import javax.persistence.TemporalType;
  * @author Storm
  */
 @Entity
-@Table(name = "add")
+@Table(name = "list")
 @NamedQueries({
-    @NamedQuery(name = "Add.findAll", query = "SELECT a FROM Add a"),
-    @NamedQuery(name = "Add.findByUserId", query = "SELECT a FROM Add a WHERE a.addPK.userId = :userId"),
-    @NamedQuery(name = "Add.findByAlbumId", query = "SELECT a FROM Add a WHERE a.addPK.albumId = :albumId"),
-    @NamedQuery(name = "Add.findByType", query = "SELECT a FROM Add a WHERE a.type = :type"),
-    @NamedQuery(name = "Add.findByReview", query = "SELECT a FROM Add a WHERE a.review = :review"),
-    @NamedQuery(name = "Add.findByRating", query = "SELECT a FROM Add a WHERE a.rating = :rating"),
-    @NamedQuery(name = "Add.findByDate", query = "SELECT a FROM Add a WHERE a.date = :date"),
-    @NamedQuery(name = "Add.findByCreatedAt", query = "SELECT a FROM Add a WHERE a.createdAt = :createdAt"),
-    @NamedQuery(name = "Add.findByUpdatedAt", query = "SELECT a FROM Add a WHERE a.updatedAt = :updatedAt")})
-public class Add implements Serializable {
+    @NamedQuery(name = "List.findAll", query = "SELECT l FROM List l"),
+    @NamedQuery(name = "List.findByUserId", query = "SELECT l FROM List l WHERE l.listPK.userId = :userId"),
+    @NamedQuery(name = "List.findByAlbumId", query = "SELECT l FROM List l WHERE l.listPK.albumId = :albumId"),
+    @NamedQuery(name = "List.findByType", query = "SELECT l FROM List l WHERE l.type = :type"),
+    @NamedQuery(name = "List.findByReview", query = "SELECT l FROM List l WHERE l.review = :review"),
+    @NamedQuery(name = "List.findByRating", query = "SELECT l FROM List l WHERE l.rating = :rating"),
+    @NamedQuery(name = "List.findByDate", query = "SELECT l FROM List l WHERE l.date = :date"),
+    @NamedQuery(name = "List.findByCreatedAt", query = "SELECT l FROM List l WHERE l.createdAt = :createdAt"),
+    @NamedQuery(name = "List.findByUpdatedAt", query = "SELECT l FROM List l WHERE l.updatedAt = :updatedAt")})
+public class List implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected AddPK addPK;
+    protected ListPK listPK;
     @Column(name = "type")
     private String type;
     @Column(name = "review")
@@ -61,23 +61,23 @@ public class Add implements Serializable {
     @ManyToOne(optional = false)
     private Users users;
 
-    public Add() {
+    public List() {
     }
 
-    public Add(AddPK addPK) {
-        this.addPK = addPK;
+    public List(ListPK listPK) {
+        this.listPK = listPK;
     }
 
-    public Add(long userId, long albumId) {
-        this.addPK = new AddPK(userId, albumId);
+    public List(long userId, long albumId) {
+        this.listPK = new ListPK(userId, albumId);
     }
 
-    public AddPK getAddPK() {
-        return addPK;
+    public ListPK getListPK() {
+        return listPK;
     }
 
-    public void setAddPK(AddPK addPK) {
-        this.addPK = addPK;
+    public void setListPK(ListPK listPK) {
+        this.listPK = listPK;
     }
 
     public String getType() {
@@ -147,18 +147,18 @@ public class Add implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (addPK != null ? addPK.hashCode() : 0);
+        hash += (listPK != null ? listPK.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Add)) {
+        if (!(object instanceof List)) {
             return false;
         }
-        Add other = (Add) object;
-        if ((this.addPK == null && other.addPK != null) || (this.addPK != null && !this.addPK.equals(other.addPK))) {
+        List other = (List) object;
+        if ((this.listPK == null && other.listPK != null) || (this.listPK != null && !this.listPK.equals(other.listPK))) {
             return false;
         }
         return true;
@@ -166,7 +166,7 @@ public class Add implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.vo.Add[ addPK=" + addPK + " ]";
+        return "modelo.vo.List[ listPK=" + listPK + " ]";
     }
-
+    
 }

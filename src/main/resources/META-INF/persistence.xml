@@ -5,6 +5,7 @@
     <class>modelo.vo.Albums</class>
     <class>modelo.vo.Users</class>
     <class>modelo.vo.Add</class>
+    <class>modelo.vo.List</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.56.103:3306/playbackd?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

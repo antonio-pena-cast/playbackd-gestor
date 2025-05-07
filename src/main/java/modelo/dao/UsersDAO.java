@@ -51,4 +51,8 @@ public class UsersDAO {
         }
     }
 
+    public void borrarUsuario(Session session, Users u) throws Exception {
+        session.delete(u);
+    }
+
 }

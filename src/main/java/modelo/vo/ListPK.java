@@ -14,7 +14,7 @@ import javax.persistence.Embeddable;
  * @author Storm
  */
 @Embeddable
-public class AddPK implements Serializable {
+public class ListPK implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "user_id")
@@ -23,10 +23,10 @@ public class AddPK implements Serializable {
     @Column(name = "album_id")
     private long albumId;
 
-    public AddPK() {
+    public ListPK() {
     }
 
-    public AddPK(long userId, long albumId) {
+    public ListPK(long userId, long albumId) {
         this.userId = userId;
         this.albumId = albumId;
     }
@@ -58,10 +58,10 @@ public class AddPK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AddPK)) {
+        if (!(object instanceof ListPK)) {
             return false;
         }
-        AddPK other = (AddPK) object;
+        ListPK other = (ListPK) object;
         if (this.userId != other.userId) {
             return false;
         }
@@ -73,7 +73,7 @@ public class AddPK implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.vo.AddPK[ userId=" + userId + ", albumId=" + albumId + " ]";
+        return "modelo.vo.ListPK[ userId=" + userId + ", albumId=" + albumId + " ]";
     }
     
 }

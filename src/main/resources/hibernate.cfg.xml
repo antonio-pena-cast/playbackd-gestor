@@ -22,7 +22,7 @@
         <!--         <mapping class="modelo.vo.clase"/>        -->
         <mapping class="modelo.vo.Albums"/>
         <mapping class="modelo.vo.Users"/>
-        <mapping class="modelo.vo.Add"/>
+        <mapping class="modelo.vo.List"/>
     </session-factory>	
 </hibernate-configuration>
 

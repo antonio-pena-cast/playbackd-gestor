@@ -39,6 +39,9 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Albums.findByUpdatedAt", query = "SELECT a FROM Albums a WHERE a.updatedAt = :updatedAt")})
 public class Albums implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "albums")
+    private List<modelo.vo.List> listList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,7 +61,7 @@ public class Albums implements Serializable {
     @Column(name = "release_date")
     @Temporal(TemporalType.DATE)
     private Date releaseDate;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "image")
     private String image;
     @Column(name = "created_at")
@@ -68,7 +71,7 @@ public class Albums implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
     @OneToMany(mappedBy = "albums")
-    private List<Add> addList;
+    private List<modelo.vo.List> addList;
 
     public Albums() {
     }
@@ -84,6 +87,21 @@ public class Albums implements Serializable {
         this.genre = genre;
         this.releaseDate = releaseDate;
         this.image = image;
+    }
+    
+    public Albums(String name, String author, String genre, Date releaseDate, String image) {
+        this.name = name;
+        this.author = author;
+        this.genre = genre;
+        this.releaseDate = releaseDate;
+        this.image = image;
+    }
+
+    public Albums(String name, String author, String genre, Date releaseDate) {
+        this.name = name;
+        this.author = author;
+        this.genre = genre;
+        this.releaseDate = releaseDate;
     }
 
     public Long getId() {
@@ -150,11 +168,11 @@ public class Albums implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public List<Add> getAddList() {
+    public List<modelo.vo.List> getAddList() {
         return addList;
     }
 
-    public void setAddList(List<Add> addList) {
+    public void setAddList(List<modelo.vo.List> addList) {
         this.addList = addList;
     }
 
@@ -180,7 +198,15 @@ public class Albums implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.vo.Albums[ id=" + id + " ]";
+        return this.name;
+    }
+
+    public List<modelo.vo.List> getListList() {
+        return listList;
+    }
+
+    public void setListList(List<modelo.vo.List> listList) {
+        this.listList = listList;
     }
     
 }

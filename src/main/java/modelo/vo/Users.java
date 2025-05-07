@@ -38,6 +38,9 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Users.findByUpdatedAt", query = "SELECT u FROM Users u WHERE u.updatedAt = :updatedAt")})
 public class Users implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
+    private List<modelo.vo.List> listList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,7 +65,7 @@ public class Users implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
     @OneToMany(mappedBy = "users")
-    private List<Add> addList;
+    private List<modelo.vo.List> addList;
 
     public Users() {
     }
@@ -140,11 +143,11 @@ public class Users implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public List<Add> getAddList() {
+    public List<modelo.vo.List> getAddList() {
         return addList;
     }
 
-    public void setAddList(List<Add> addList) {
+    public void setAddList(List<modelo.vo.List> addList) {
         this.addList = addList;
     }
 
@@ -171,6 +174,14 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    public List<modelo.vo.List> getListList() {
+        return listList;
+    }
+
+    public void setListList(List<modelo.vo.List> listList) {
+        this.listList = listList;
     }
     
 }
